@@ -1,8 +1,4 @@
-/*
-Problem Statement:
-Write a program where the press of a switch is detected by a GPIO interrupt. On each button press the interrupt handler should toggle the state of RED LED.
-*/
-
+// lab 5
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -42,28 +38,4 @@ void systick_timer()                           // DEFINING systick_timer FUNCTIO
 
                     }
            NVIC_ST_CTRL_R = 0x0;
-}
-
-void Portf_interrupt_handler(void)
-{
-    systick_timer();
-    if (GPIO_PORTF_RIS_R & 0x10)
-    {
-    GPIO_PORTF_DATA_R ^= 0x02;
-    GPIO_PORTF_ICR_R = 0x10;
-    }
-
-    if (GPIO_PORTF_RIS_R & 0x01)
-    {
-    GPIO_PORTF_DATA_R ^= 0x02;
-    GPIO_PORTF_ICR_R = 0x01;
-    }
-}
-int main(void)                               // MAIN FUNCTION
-{
-    GPIO_PORT_F_init();                      // GPIO INITIALISATION FUNCTION
-    systick_timer();                       // SYSTICK SETUP
-    while (1)
-    {                                        // DO NOTHING
-    }
 }
